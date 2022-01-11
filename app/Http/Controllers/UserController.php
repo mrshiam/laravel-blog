@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $data['title'] = 'User List';
         $data['users'] = User::all();
         return view('admin.user.index',$data);
     }
@@ -26,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $data['title'] = 'Create New User';
+        return view('admin.user.create',$data);
     }
 
     /**
@@ -69,6 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $data['title'] = 'Edit User';
         $data['user'] = $user;
         return view('admin.user.edit',$data);
     }
