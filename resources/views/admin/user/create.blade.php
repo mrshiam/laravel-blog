@@ -14,27 +14,7 @@
                 <form action="{{route('user.store')}}" method="post">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" value="{{old('name')}}" placeholder="Enter user name">
-                            @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{old('email')}}" placeholder="Enter email">
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" name="phone" class="form-control" id="phone" value="{{old('phone')}}" placeholder="Enter phone number">
-                            @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @include('admin.user._form')
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" class="form-control"  id="exampleInputPassword1" placeholder="Password">
