@@ -11,6 +11,7 @@
     <div class="row">
         <!-- /.col -->
         <div class="col-md-12">
+
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Users List</h3>
@@ -49,7 +50,7 @@
                                     <form action="{{route('user.destroy',$user->id)}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are sure to delete?')">Delete</button>
                                     </form>
                                 </td>
                             </tr>
