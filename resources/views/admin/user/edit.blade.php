@@ -854,12 +854,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Edit User</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item active">Edit User</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -871,54 +871,55 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- /.col -->
-                    <div class="col-md-12">
-                        <div class="card">
+                    <!-- left column -->
+                    <div class="offset-3 col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Users List</h3>
+                                <h3 class="card-title">Edit User</h3>
 
-                                <div class="card-tools">
-                                    <ul class="pagination pagination-sm float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                    </ul>
-                                </div>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Name</th>
-                                        <th>Email Address</th>
-                                        <th>Phone Number</th>
-                                        <th style="width: 40px">Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($users as $user)
-                                        <tr>
-                                            <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->phone}}</td>
-                                            <td>
-                                                <a href="{{route('user.edit',$user->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                            <!-- form start -->
+                            <form action="{{route('user.update',$user->id)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control" id="name" value="{{$user->name}}" placeholder="Enter user name">
+                                        @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{$user->email}}" placeholder="Enter email">
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="phone" class="form-control" id="phone" value="{{$user->phone}}" placeholder="Enter phone number">
+                                        @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card -->
+
                     </div>
-                    <!-- /.col -->
+                    <!--/.col (left) -->
 
                 </div>
             </div><!-- /.container-fluid -->
