@@ -14,7 +14,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Users List</h3>
+                    <h3 class="card-title">Categories List</h3>
 
 
                 </div>
@@ -25,21 +25,19 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Name</th>
-                            <th>Email Address</th>
-                            <th>Phone Number</th>
+                            <th>Status</th>
                             <th style="width: 40px">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($categories as $category)
                             <tr>
                                 <td>{{ $serial++ }}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
+                                <td>{{$category->name}}</td>
+                                <td>{{$category->status}}</td>
                                 <td>
-                                    <a href="{{route('user.edit',$user->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                    <form action="{{route('user.destroy',$user->id)}}" method="post">
+                                    <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{route('category.destroy',$category->id)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are sure to delete?')">Delete</button>
@@ -56,7 +54,7 @@
             <!-- /.card -->
             {{-- Pagination --}}
             <div class="d-flex justify-content-center">
-                {!! $users->links() !!}
+                {!! $categories->links() !!}
             </div>
         </div>
         <!-- /.col -->
