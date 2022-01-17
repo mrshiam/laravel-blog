@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('dashboard',function (){
 })->name('dashboard');
 Route::resource('user',UserController::Class)->except(['show']);
 Route::resource('category', CategoryController::class)->except(['show']);
+Route::resource('author', AuthorController::class);
+
