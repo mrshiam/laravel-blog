@@ -20,7 +20,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{route('author.store')}}" method="post">
+                <form action="{{route('author.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         @include('admin.author._form')

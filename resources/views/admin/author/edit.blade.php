@@ -20,7 +20,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{route('author.update',$author->id)}}" method="post">
+                <form action="{{route('author.update',$author->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="card-body">

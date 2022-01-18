@@ -45,9 +45,20 @@ class AuthorController extends Controller
             'phone' => 'required|unique:authors',
             'status' => 'required'
         ]);
-        Author::create($request->all());
+        $data = $request->all();
+        if($request->photo) {
+            $data['photo'] = $this->fileUpload($request->photo);
+        }
+        Author::create($data);
         session()->flash('message','Author Created Successfully!');
         return redirect()->route('author.index');
+    }
+    private function fileUpload($img)
+    {
+        $path = 'uploads/authors';
+        $img->move($path, $img->getClientOriginalName());
+        $fullPath = $path . '/' . $img->getClientOriginalName();
+        return $fullPath;
     }
 
     /**
@@ -89,7 +100,11 @@ class AuthorController extends Controller
             'phone' => 'required|unique:authors,phone,'.$author->id,
             'status' => 'required',
         ]);
-        $author->update($request->all());
+        $data = $request->all();
+        if($request->photo) {
+            $data['photo'] = $this->fileUpload($request->photo);
+        }
+        $author->update($data);
         session()->flash('message','Author Updated Successfully!');
         return redirect()->route('author.index');
     }

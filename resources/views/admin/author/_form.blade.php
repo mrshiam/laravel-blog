@@ -26,6 +26,15 @@
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 </div>
+
+<div class="form-group">
+    <label for="photo">Author's Photo</label>
+    <input type="file" name="photo" class="form-control" id="photo">
+    @error('photo')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+</div>
+
 <div class="form-group">
     <label for="status">Status</label>
     <br>
@@ -38,11 +47,5 @@
     @enderror
 </div>
 
-{{--<div class="form-group">--}}
-{{--    <label for="photo">Photo</label>--}}
-{{--    <input type="file" name="photo" class="form-control" id="photo" value="{{old('photo',isset($author)?$author->photo:null)}}">--}}
-{{--    @error('photo')--}}
-{{--    <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--    @enderror--}}
-{{--</div>--}}
+
 
