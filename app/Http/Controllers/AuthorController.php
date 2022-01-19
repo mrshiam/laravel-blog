@@ -56,8 +56,9 @@ class AuthorController extends Controller
     private function fileUpload($img)
     {
         $path = 'uploads/authors';
-        $img->move($path, $img->getClientOriginalName());
-        $fullPath = $path . '/' . $img->getClientOriginalName();
+        $file_name = time().rand(00000,99999).'.'.$img->getClientOriginalExtension();
+        $img->move($path, $file_name);
+        $fullPath = $path . '/' . $file_name;
         return $fullPath;
     }
 
@@ -69,7 +70,9 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        $data['title'] = 'Author Details';
+        $data['author'] = $author;
+        return view('admin.author.show',$data);
     }
 
     /**
@@ -103,6 +106,10 @@ class AuthorController extends Controller
         $data = $request->all();
         if($request->photo) {
             $data['photo'] = $this->fileUpload($request->photo);
+            if($author->photo && file_exists($author->photo))
+            {
+                unlink($author->photo);
+            }
         }
         $author->update($data);
         session()->flash('message','Author Updated Successfully!');
@@ -117,6 +124,10 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+        if($author->photo && file_exists($author->photo))
+        {
+            unlink($author->photo);
+        }
         $author->delete();
         session()->flash('message','Author Deleted Successfully');
         return redirect()->route('author.index');
