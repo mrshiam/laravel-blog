@@ -17,4 +17,5 @@ class Author extends Model
         'total_post',
         'status',
     ];
+
 }

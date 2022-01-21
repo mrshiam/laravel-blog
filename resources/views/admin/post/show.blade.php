@@ -3,7 +3,7 @@
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('author.index')}}">Authors</a></li>
+            <li class="breadcrumb-item"><a href="{{route('post.index')}}">Posts</a></li>
             <li class="breadcrumb-item active">{{$title}}</li>
         </ol>
     </div><!-- /.col -->
@@ -20,38 +20,35 @@
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                     <div class="row">
+
                         <div class="col-md-3">
-                            <img src="{{asset($author->photo)}}" alt="" width="100%">
-                        </div>
-                        <div class="col-md-6">
                             <table class="table table-bordered">
+
                                 <tr>
-                                    <th colspan="2">
-                                        {{$author->name}}
-                                    </th>
+                                    <td>Is Featured</td>
+                                    <td>{{$post->is_featured==1?'Yes':'No'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td>
-                                    <td>{{$author->email}}</td>
+                                    <td>Category</td>
+                                    <td>{{$post->category->name}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Phone</td>
-                                    <td>{{$author->phone}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{$author->address}}</td>
+                                    <td>Author</td>
+                                    <td>{{$post->author->name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>
-                                    <td>{{$author->status}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Post</td>
-                                    <td>{{$author->total_post}}</td>
+                                    <td>{{$post->status}}</td>
                                 </tr>
 
+
                             </table>
+                        </div>
+                        <div class="col-md-9">
+                            <h1>{{$post->title}}</h1>
+                            <img src="{{asset($post->image)}}" alt="" width="100%">
+                            <p>{{$post->details}}</p>
+
                         </div>
                     </div>
                 </div>
