@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,18 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
-Route::get('dashboard',function (){
-    return view('admin.dashboard');
-})->name('dashboard');
-Route::resource('user',UserController::Class)->except(['show']);
-Route::resource('category', CategoryController::class)->except(['show']);
-Route::resource('author', AuthorController::class);
-Route::resource('post', PostController::class);
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('dashboard',function (){
+        return view('admin.dashboard');
+    })->name('dashboard');
+    Route::resource('user',UserController::Class)->except(['show']);
+    Route::resource('category', CategoryController::class)->except(['show']);
+    Route::resource('author', AuthorController::class);
+    Route::resource('post', PostController::class);
+});

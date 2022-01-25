@@ -144,6 +144,17 @@
 
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-info">
+                            LogOut
+                        </button>
+                    </form>
+
+
+
+                </li>
 
 
             </ul>

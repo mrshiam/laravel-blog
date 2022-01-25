@@ -17,9 +17,9 @@ class PostController extends Controller
     public function index()
     {
         $data['title'] = 'List of Posts';
-        $data['posts'] = Post::with('category')->orderBy('id','DESC')->paginate(10);
+        $data['posts'] = Post::with('category')->orderBy('id', 'DESC')->paginate(10);
         $data['serial'] = managePaginationSerial($data['posts']);
-        return view('admin.post.index',$data);
+        return view('admin.post.index', $data);
     }
 
     /**
@@ -30,9 +30,9 @@ class PostController extends Controller
     public function create()
     {
         $data['title'] = 'Create New Post';
-        $data['categories'] = Category::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
-        $data['authors'] = Author::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
-        return view('admin.post.create',$data);
+        $data['categories'] = Category::where('status', 'Active')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $data['authors'] = Author::where('status', 'Active')->orderBy('name', 'ASC')->pluck('name', 'id');
+        return view('admin.post.create', $data);
     }
 
     /**
@@ -44,27 +44,26 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'category_id' => 'required',
-           'author_id' => 'required',
-           'title' => 'required',
-           'details' => 'required',
-           'status' => 'required',
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'status' => 'required',
         ]);
 
         $data = $request->all();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $data['image'] = $this->fileUpload($request->image);
         }
-//        dd($data);
+        //        dd($data);
         Post::create($data);
-        session()->flash('message','Post Added Successfully');
+        session()->flash('message', 'Post Added Successfully');
         return redirect()->route('post.index');
-
     }
     private function fileUpload($img)
     {
         $path = 'uploads/posts';
-        $file_name = time().rand(00000,99999).'.'.$img->getClientOriginalExtension();
+        $file_name = time() . rand(00000, 99999) . '.' . $img->getClientOriginalExtension();
         $img->move($path, $file_name);
         $fullPath = $path . '/' . $file_name;
         return $fullPath;
@@ -79,8 +78,8 @@ class PostController extends Controller
     public function show($id)
     {
         $data['title'] = 'Post Details';
-        $data['post'] = Post::with('category','author')->findOrFail($id);
-        return view('admin.post.show',$data);
+        $data['post'] = Post::with('category', 'author')->findOrFail($id);
+        return view('admin.post.show', $data);
     }
 
     /**
@@ -92,10 +91,10 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $data['title'] = 'Edit Post';
-        $data['categories'] = Category::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
-        $data['authors'] = Author::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
+        $data['categories'] = Category::where('status', 'Active')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $data['authors'] = Author::where('status', 'Active')->orderBy('name', 'ASC')->pluck('name', 'id');
         $data['post'] = $post;
-        return view('admin.post.edit',$data);
+        return view('admin.post.edit', $data);
     }
 
     /**
@@ -116,20 +115,18 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $data['image'] = $this->fileUpload($request->image);
-            if($post->image && file_exists($post->image))
-                {
-                    unlink($post->image);
-                }
+            if ($post->image && file_exists($post->image)) {
+                unlink($post->image);
+            }
         }
-        if(!$request->has('is_featured'))
-        {
+        if (!$request->has('is_featured')) {
             $data['is_featured'] = 0;
         }
-//        dd($data);
+        //        dd($data);
         $post->update($data);
-        session()->flash('message','Post Updated Successfully');
+        session()->flash('message', 'Post Updated Successfully');
         return redirect()->route('post.index');
     }
 
@@ -141,12 +138,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->image && file_exists($post->image))
-        {
+        if ($post->image && file_exists($post->image)) {
             unlink($post->image);
         }
         $post->delete();
-        session()->flash('message','Post Deleted Successfully');
+        session()->flash('message', 'Post Deleted Successfully');
         return redirect()->route('post.index');
     }
 }
