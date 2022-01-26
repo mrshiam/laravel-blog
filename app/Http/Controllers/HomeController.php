@@ -24,11 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['editors_picks'] = Post::with('author','category')->where('is_editors_pick',1)
+        $data['editors_picks'] = Post::with('author','category')
+            ->where('is_editors_pick',1)
             ->where('status','Published')
             ->limit(4)->orderBy('id','DESC')->get();
 
-        $data['trendings'] = Post::with('author','category')->where('is_trending',1)
+        $data['trendings'] = Post::with('author','category')
+            ->where('is_trending',1)
             ->where('status','Published')
             ->limit(4)->orderBy('id','DESC')->get();
 //        dd($data);
