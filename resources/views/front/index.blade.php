@@ -58,48 +58,30 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="post-entry-1">
-                                <a href="post-single.html"><img src={{ asset('assets/front/images/img_h_1.jpg') }} alt="Image" class="img-fluid"></a>
-                                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                                <a href="post-single.html"><img src={{ asset($editors_picks[0]->image) }} alt="Image" class="img-fluid"></a>
+                                <h2><a href="blog-single.html">{{$editors_picks[0]->title}}</a></h2>
+                                <p>{{Str::limit($editors_picks[0]->details, 150)}}</p>
                                 <div class="post-meta">
-                                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                                    <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                                    <span class="d-block"><a href="#">{{$editors_picks[0]->author->name}}</a> in <a href="#">{{$editors_picks[0]->category->name}}</a></span>
+                                    <span class="date-read">{{date('M d',strtotime($editors_picks[0]->created_at))}} <span class="mx-1">&bullet;</span>{{$editors_picks[0]->total_read}} <span class="icon-star2"></span></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="post-entry-2 d-flex bg-light">
-                                <div class="thumbnail" style="background-image: url({{ asset('assets/front/images/img_v_1.jpg') }})"></div>
-                                <div class="contents">
-                                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                                    <div class="post-meta">
-                                        <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                                        <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                            @foreach($editors_picks as $id=>$post)
+                                @if($id !=0)
+                                    <div class="post-entry-2 d-flex bg-light">
+                                        <div class="thumbnail" style="background-image: url({{ asset($post->image) }})"></div>
+                                        <div class="contents">
+                                            <h2><a href="blog-single.html">{{$post->title}}</a></h2>
+                                            <div class="post-meta">
+                                                <span class="d-block"><a href="#">{{$post->author->name}}</a> in <a href="#">{{$post->category->name}}</a></span>
+                                                <span class="date-read">{{date('M d', strtotime($post->created_at))}}<span class="mx-1">&bullet;</span> {{$post->total_read}} <span class="icon-star2"></span></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="post-entry-2 d-flex">
-                                <div class="thumbnail" style="background-image: url({{ asset('assets/front/images/img_v_2.jpg') }})"></div>
-                                <div class="contents">
-                                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                                    <div class="post-meta">
-                                        <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                                        <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="post-entry-2 d-flex">
-                                <div class="thumbnail" style="background-image: url({{ asset('assets/front/images/img_v_3.jpg') }})"></div>
-                                <div class="contents">
-                                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                                    <div class="post-meta">
-                                        <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                                        <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-                                    </div>
-                                </div>
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
