@@ -129,6 +129,12 @@ class PostController extends Controller
         if (!$request->has('is_featured')) {
             $data['is_featured'] = 0;
         }
+        if (!$request->has('is_trending')) {
+            $data['is_trending'] = 0;
+        }
+        if (!$request->has('is_editors_pick')) {
+            $data['is_editors_pick'] = 0;
+        }
         //        dd($data);
         $post->update($data);
         session()->flash('message', 'Post Updated Successfully');

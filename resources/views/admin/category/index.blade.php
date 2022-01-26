@@ -25,6 +25,7 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Name</th>
+                            <th>Is Featured</th>
                             <th>Status</th>
                             <th style="width: 40px">Actions</th>
                         </tr>
@@ -34,6 +35,7 @@
                             <tr>
                                 <td>{{ $serial++ }}</td>
                                 <td>{{$category->name}}</td>
+                                <td>{{$category->is_featured==1?'Yes':'No'}}</td>
                                 <td>{{$category->status}}</td>
                                 <td>
                                     <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm">Edit</a>

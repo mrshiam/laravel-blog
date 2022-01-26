@@ -54,6 +54,23 @@
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 </div>
+<div class="form-group">
+    <label for="is_trending">Is Trending</label>
+    <input type="checkbox" name="is_trending"  id="is_trending" @if(old('is_trending',isset($post)?$post->is_trending:null) == 1) checked @endif value="1">
+    <label for="is_trending">Yes</label>
+    @error('is_trending')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="is_editors_pick">Is Editor's Pick</label>
+    <input type="checkbox" name="is_editors_pick"  id="is_editors_pick" @if(old('is_editors_pick',isset($post)?$post->is_editors_pick:null) == 1) checked @endif value="1">
+    <label for="is_editors_pick">Yes</label>
+    @error('is_editors_pick')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+</div>
 
 <div class="form-group">
     <label for="status">Status</label>
