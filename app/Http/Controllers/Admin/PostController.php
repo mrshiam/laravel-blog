@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use function managePaginationSerial;
+use function redirect;
+use function session;
+use function view;
 
 class PostController extends Controller
 {

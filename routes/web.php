@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +19,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [HomeController::class,'index']);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'],function(){
     Route::get('dashboard',function (){
