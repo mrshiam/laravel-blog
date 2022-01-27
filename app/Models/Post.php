@@ -29,4 +29,11 @@ class Post extends Model
     {
         return $this->belongsTo(Author::class);
     }
+
+    public static function popular()
+    {
+        return Post::with('author','category')
+            ->where('status','Published')
+            ->limit(4)->orderBy('total_read','DESC')->get();
+    }
 }
