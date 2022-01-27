@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use function view;
 
@@ -33,6 +34,20 @@ class HomeController extends Controller
             ->where('is_trending',1)
             ->where('status','Published')
             ->limit(4)->orderBy('id','DESC')->get();
+
+        $data['categories'] = Category::with(['posts'=>function($query){
+            $query->orderBy('id','DESC');
+        }])
+            ->where('is_featured',1)
+            ->limit(2)->get();
+
+        $data['recent_posts'] = Post::with('author','category')
+            ->where('status','Published')
+            ->limit(3)->orderBy('id','DESC')->get();
+
+        $data['popular_posts'] = Post::with('author','category')
+            ->where('status','Published')
+            ->limit(4)->orderBy('total_read','DESC')->get();
 //        dd($data);
         return view('front.index',$data);
     }
